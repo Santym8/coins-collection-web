@@ -25,12 +25,16 @@ export class RegisterComponent {
 
   isLoading: boolean = false;
 
-  constructor(private authService: AuthService, library: FaIconLibrary) {
-    library.addIcons(faSpinner); // Add specific icons you need
+  constructor(
+    private authService: AuthService,
+    private library: FaIconLibrary
+  ) {
+    library.addIcons(faSpinner);
   }
 
 
   onRegister() {
+    this.isLoading = true;
     this.authService.register(this.registerForm.username, this.registerForm.email, this.registerForm.password).subscribe(
       {
         next: data => {
