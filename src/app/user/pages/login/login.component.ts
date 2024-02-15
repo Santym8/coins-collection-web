@@ -9,6 +9,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { StorageService } from '../../../_shared/services/storage/storage.service';
 import { ApiErrorResponse } from '../../../_shared/dto/ApiErrorResponse';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class LoginComponent {
     private authService: AuthService,
     private library: FaIconLibrary,
     private storageService: StorageService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {
     library.addIcons(faSpinner);
   }
@@ -44,6 +46,7 @@ export class LoginComponent {
         next: data => {
           this.storageService.saveUser(data);
           this.isLoading = false;
+          this.router.navigate(['/']);
         },
         error: err => {
           const apiError: ApiErrorResponse = err.error;
@@ -54,7 +57,7 @@ export class LoginComponent {
             this.errorMessage = apiError.message;
           }
           this.isLoading = false;
-          this.toastr.error(this.errorMessage, 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center'});
+          this.toastr.error(this.errorMessage, 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
         }
       }
     );
