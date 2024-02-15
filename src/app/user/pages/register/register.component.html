@@ -16,28 +16,33 @@
         </div>
     </div>
 
-    <!-- Login Form -->
+    <!-- Register Form -->
     <div class="flex-1 flex items-center justify-center p-8 flex-col">
         <h2 class="mb-10 text-3xl font-bold text-center">Register</h2>
 
-        <form class="max-w-md w-full flex-col">
+        <form class="max-w-md w-full flex-col" (ngSubmit)="onRegister()" ngNativeValidate>
             <div class="mb-10">
                 <label for="username" class="block text-sm text-gray-700 font-bold">Username *</label>
-                <input type="text" id="username" name="username" required class="mt-1 p-2 w-full border rounded-md"
-                    placeholder="username">
+                <input type="text" id="username" name="username" class="mt-1 p-2 w-full border rounded-md"
+                    placeholder="username" [(ngModel)]="registerForm.username" required [maxLength]="20"
+                    [minlength]="4">
             </div>
             <div class="mb-10">
                 <label for="email" class="block text-sm text-gray-700 font-bold">Email *</label>
                 <input type="email" id="email" name="email" required class="mt-1 p-2 w-full border rounded-md"
-                    placeholder="email">
+                    placeholder="email" [(ngModel)]="registerForm.email">
             </div>
             <div class="mb-10">
                 <label for="password" class="block text-sm font-bold text-gray-700">Password *</label>
                 <input type="password" id="password" name="password" required placeholder="password"
-                    class="mt-1 p-2 w-full border rounded-md">
+                    class="mt-1 p-2 w-full border rounded-md" [(ngModel)]="registerForm.password" required
+                    [maxLength]="20" [minlength]="8">
             </div>
             <button type="submit" class="w-full text-white p-2 rounded-full" style="background-color: #23A6F0;">
-                Register
+                <span *ngIf="!isLoading">Register</span>
+                <span *ngIf="isLoading">
+                    <fa-icon [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
+                </span>
             </button>
         </form>
 

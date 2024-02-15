@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, isDevMode } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './_shared/components/header/header.component';
 
@@ -10,4 +10,12 @@ import { HeaderComponent } from './_shared/components/header/header.component';
 })
 export class AppComponent {
   title = 'coins-collection-web';
+
+  ngOnInit() {
+    if (isDevMode()) {
+      console.log('Development!');
+    } else {
+      console.log('Production!');
+    }
+  }
 }
