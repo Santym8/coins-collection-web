@@ -1,0 +1,49 @@
+<div class="flex grid-cols-2" style="height: 80vh;">
+    <div class="flex-1 flex items-center justify-center p-8 flex-col">
+        <!-- Login Form -->
+        <h2 class="mb-10 text-3xl font-bold text-center">Login</h2>
+
+        <form class="max-w-md w-full flex-col">
+            <div class="mb-10">
+                <label for="username" class="block text-sm text-gray-700 font-bold">Username / Email *</label>
+                <input type="text" id="username" name="username" required class="mt-1 p-2 w-full border rounded-md"
+                    placeholder="username or email">
+            </div>
+            <div class="mb-10">
+                <label for="password" class="block text-sm font-bold text-gray-700">Password *</label>
+                <input type="password" id="password" name="password" required placeholder="password"
+                    class="mt-1 p-2 w-full border rounded-md">
+            </div>
+            <button type="submit" class="w-full text-white p-2 rounded-full" style="background-color: #23A6F0;">
+                Login
+            </button>
+        </form>
+
+        <a href="/register" class="mt-10 lg:text-1xl font-bold py-2 px-4 rounded-full border w-"
+            style="border-color: #23A6F0;">
+            Register
+        </a>
+
+    </div>
+
+
+
+    <!-- Image -->
+
+    <div class="flex-1 flex items-center justify-center relative text-center mr-20"
+        style="border-radius: 20px; overflow: hidden;">
+        <div class="absolute top-0 left-0 right-0 bottom-0 bg-no-repeat bg-cover opacity-15"
+            style="background-image: url('/assets/img/coins.jpg'); z-index: -1;"></div>
+        <div class="text-center top-0 left-0">
+            <p class="lg:text-3xl my-10" style="color: #23A6F0;">START A</p>
+            <h1 class="lg:text-7xl my-10 font-bold" style="color: #252B42;">Coin Collection</h1>
+            <p class="lg:text-3xl my-10" style="color: #737373;">for free</p>
+            <a href="#"
+                class="mt-4 lg:text-3xl my-10 inline-block bg-transparent hover:text-white font-bold py-2 px-4 rounded-lg border"
+                style="color: #23A6F0; border-color: #23A6F0;">
+                See coins
+            </a>
+        </div>
+    </div>
+
+</div>
