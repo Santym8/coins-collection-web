@@ -12,7 +12,19 @@ export class StorageService {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
-  clean(): void {
+  private isLoggedIn(): boolean {
+    if (isPlatformBrowser(this.platformId)) {
+      const user = window.sessionStorage.getItem(USER_KEY);
+      return !!user;
+    }
+    return false;
+  }
+
+  private updateLoginStatus(): void {
+    this.loggedInStatus.next(this.isLoggedIn());
+  }
+
+  public clean(): void {
     if (isPlatformBrowser(this.platformId)) {
       window.sessionStorage.clear();
       this.updateLoginStatus();
@@ -25,18 +37,6 @@ export class StorageService {
       window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
       this.updateLoginStatus();
     }
-  }
-
-  private updateLoginStatus(): void {
-    this.loggedInStatus.next(this.isLoggedIn());
-  }
-
-  public isLoggedIn(): boolean {
-    if (isPlatformBrowser(this.platformId)) {
-      const user = window.sessionStorage.getItem(USER_KEY);
-      return !!user;
-    }
-    return false;
   }
 
   public getLoggedInStatus() {
