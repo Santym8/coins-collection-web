@@ -1,13 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { StorageService } from '../../services/storage/storage.service';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
-  
+  styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
 
+  icons = {
+    logout: faArrowRightFromBracket,
+    user: faUser,
+  };
+  
+  userLoggedIn: boolean = false;
+  private loginStatusSubscription: Subscription;
+
+  constructor(private storage: StorageService, private router: Router) {
+    this.loginStatusSubscription = this.storage.getLoggedInStatus().subscribe((status) => {
+      this.userLoggedIn = status;
+    });
+  }
+
+  logout() {
+    this.storage.clean();
+    this.router.navigate(['/']);
+  }
+
+  ngOnDestroy() {
+    if (this.loginStatusSubscription) {
+      this.loginStatusSubscription.unsubscribe();
+    }
+  }
 }
