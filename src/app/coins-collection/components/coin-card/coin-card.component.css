@@ -4,3 +4,29 @@
     border-radius: 2rem;
     border-width: 1px;
 }
+
+.button-found {
+    background-color: #23A6F0;
+    border-radius: 2rem;
+}
+
+.button-found:hover{
+    border-radius: 2rem;
+    border-color: #23A6F0;
+    border-width: 1px;
+    background-color: white;
+    color: black;
+}
+
+
+
+.button-not_found {
+    border-radius: 2rem;
+    border-color: #23A6F0;
+    border-width: 1px;
+}
+
+.button-not_found:hover {
+    background-color: #23A6F0;
+    color: white;
+}

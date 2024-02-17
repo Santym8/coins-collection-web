@@ -1,15 +1,23 @@
 <div class="card-container">
     <div class="text-gray-700 text-2xl text-center font-bold mt-2">
-        #1
+        #{{coin.coinNumber}}
     </div>
 
-    <div class="font-bold text-2xl text-center">Title of the Card</div>
+    <div class="font-bold text-2xl text-center">{{coin.name}}</div>
 
     <div class="flex justify-center items-center mt-7">
-        <img style="width: 80%;"
-            src="https://www.usmint.gov/wordpress/wp-content/uploads/2016/06/2010-america-the-beautiful-quarters-coin-hot-springs-arkansas-uncirculated-reverse-300x300.jpg"
-            alt="Descriptive Alt Text">
+        <img style="width: 80%;" src={{coin.image}} alt="Descriptive Alt Text">
     </div>
 
-    <div class="font-bold text-2xl mb-2 text-center mt-5">2022</div>
+    <div class="font-bold text-2xl mb-2 text-center mt-1">{{coin.year}}</div>
+
+    <div *ngIf="userLoggedIn" class="flex justify-center items-center mt-2 mb-5">
+        <button *ngIf="coin.status" class="button-found text-white text-base font-bold py-2 px-4">
+            FOUND
+        </button>
+
+        <button *ngIf="!coin.status" class="button-not_found text-base font-bold py-2 px-2">
+            NOT FOUND
+        </button>
+    </div>
 </div>
