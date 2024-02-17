@@ -19,7 +19,7 @@ export class CoinsComponent {
     name: 'Maya Angelou',
     year: 2022,
     image: 'https://www.usmint.gov/wordpress/wp-content/uploads/2021/12/2022-american-women-quarters-coin-maya-angelou-uncirculated-reverse-300x300.jpg',
-    status: false
+    found: false
   };
 
   coinNotFound: Coin = {
@@ -29,6 +29,6 @@ export class CoinsComponent {
     name: 'Maya Angelou',
     year: 2022,
     image: 'https://www.usmint.gov/wordpress/wp-content/uploads/2021/12/2022-american-women-quarters-coin-maya-angelou-uncirculated-reverse-300x300.jpg',
-    status: true
+    found: true
   };
 }

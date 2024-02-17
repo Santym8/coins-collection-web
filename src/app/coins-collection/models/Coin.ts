@@ -5,5 +5,5 @@ export interface Coin {
     name: string;
     year: number;
     image: string;
-    status?: boolean;
+    found?: boolean;
 }

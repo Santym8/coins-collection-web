@@ -12,11 +12,11 @@
     <div class="font-bold text-2xl mb-2 text-center mt-1">{{coin.year}}</div>
 
     <div *ngIf="userLoggedIn" class="flex justify-center items-center mt-2 mb-5">
-        <button *ngIf="coin.status" class="button-found text-white text-base font-bold py-2 px-4">
+        <button *ngIf="coin.found" class="button-found text-white text-base font-bold py-2 px-4">
             FOUND
         </button>
 
-        <button *ngIf="!coin.status" class="button-not_found text-base font-bold py-2 px-2">
+        <button *ngIf="!coin.found" class="button-not_found text-base font-bold py-2 px-2">
             NOT FOUND
         </button>
     </div>
