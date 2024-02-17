@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../../services/storage/storage.service';
@@ -15,19 +15,23 @@ import { faArrowRightFromBracket, faUser } from '@fortawesome/free-solid-svg-ico
 })
 export class HeaderComponent implements OnDestroy {
 
-  icons = {
-    logout: faArrowRightFromBracket,
-    user: faUser,
-  };
-  
-  userLoggedIn: boolean = false;
-  private loginStatusSubscription: Subscription;
-
-  constructor(private storage: StorageService, private router: Router) {
+  constructor(
+    private storage: StorageService,
+    private router: Router
+  ) {
     this.loginStatusSubscription = this.storage.getLoggedInStatus().subscribe((status) => {
       this.userLoggedIn = status;
     });
   }
+
+  icons = {
+    logout: faArrowRightFromBracket,
+    user: faUser,
+  };
+
+  userLoggedIn: boolean = false;
+  private loginStatusSubscription: Subscription;
+
 
   logout() {
     this.storage.clean();

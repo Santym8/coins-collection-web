@@ -1,45 +1,37 @@
 <header class="text-black body-font" style="height: 10vh;">
-    <div class="container mx-auto flex justify-between items-center p-5">
-        <div class="flex title-font font-medium items-center mx-2">
-            <span class="text-center text-3xl">Coins Collection</span>
+    <div class="container mx-auto columns-3 justify-between items-center p-5">
+
+        <div class="flex title-font font-medium items-center justify-start">
+            <span class="text-center text-2xl">Coins Collection</span>
         </div>
-        <nav class="md:flex items-center text-base justify-center text-center" style="color: #737373;">
-            <a href="/" class="mr-10 hover:bg-gray-300 w-16 rounded-md">Home</a>
-            <a href="#" class="mr-10 hover:bg-gray-300 w-16 rounded-md">All</a>
-            <a href="#" class="mr-10 hover:bg-gray-300 w-16 rounded-md">Parks</a>
-            <a href="#" class="mr-10 hover:bg-gray-300 w-16 rounded-md">States</a>
-            <a href="#" class="mr-10 hover:bg-gray-300 w-16 rounded-md ">Women</a>
+
+
+        <nav class="flex items-center justify-center" style="color: #737373;">
+            <a href="/" class="mx-10 hover:bg-gray-300 w-full rounded-md text-center">Home</a>
+            <a href="#" class="mx-10 hover:bg-gray-300 w-full rounded-md text-center">Coins</a>
         </nav>
 
 
-        <div *ngIf="!userLoggedIn">
-            <div class="inline-flex items-cente justify-center  py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0"
-                style="color: #23A6F0;">
-                <fa-icon class="w-5 h-5 mr-2" [icon]="icons.user"></fa-icon>
-                <div class="flex justify-center align-middle">
-                    <a href="/login" class="mx-1">Login</a>
-                    <span class="mx-1">/</span>
-                    <a href="/register" class="mx-1">Register</a>
-                </div>
-
-
-
-
+        <div *ngIf="!userLoggedIn" class="md:flex items-center text-base justify-end text-center"
+            style="color: #23A6F0;">
+            <fa-icon class="w-5 h-5 mr-2" [icon]="icons.user"></fa-icon>
+            <div class="flex justify-center align-middle">
+                <a href="/login" class="mx-1">Login</a>
+                <span class="mx-1">/</span>
+                <a href="/register" class="mx-1">Register</a>
             </div>
         </div>
 
 
-        <div *ngIf="userLoggedIn">
-            <div class="inline-flex items-cente justify-center  py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0"
-                style="color: #23A6F0;">
-                <fa-icon class="w-5 h-5 mr-2" [icon]="icons.logout"></fa-icon>
-                <div class="flex justify-center align-middle">
-                    <button (click)="logout()">
-                        Logout
-                    </button>
-                </div>
-
+        <div *ngIf="userLoggedIn" class="md:flex items-center text-base justify-end text-center"
+            style="color: #23A6F0;">
+            <fa-icon class="w-5 h-5 mr-2" [icon]="icons.logout"></fa-icon>
+            <div class="flex justify-center align-middle">
+                <button (click)="logout()">
+                    Logout
+                </button>
             </div>
+
         </div>
     </div>
 </header>
