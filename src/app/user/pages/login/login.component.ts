@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginForm } from '../models/LoginForm';
+import { LoginForm } from '../../models/LoginForm';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';

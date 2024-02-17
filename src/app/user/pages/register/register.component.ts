@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
-import { RegisterForm } from '../models/RegisterForm';
+import { RegisterForm } from '../../models/RegisterForm';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
