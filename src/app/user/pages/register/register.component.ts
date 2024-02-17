@@ -49,7 +49,7 @@ export class RegisterComponent {
         next: data => {
           this.storageService.saveUser(data);
           this.isLoading = false;
-          this.router.navigate(['/']);
+          this.router.navigate(['/coins-collection']);
         },
         error: err => {
           const apiError: ApiErrorResponse = err.error;
