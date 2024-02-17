@@ -7,7 +7,7 @@ import { CoinsComponent } from './coins-collection/pages/coins/coins.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
-    {path: 'register', component: RegisterComponent},
-    {path: 'coins-collection', component: CoinsComponent},
+    { path: 'register', component: RegisterComponent },
+    { path: 'coins-collection', component: CoinsComponent},
     { path: '**', component: HomeComponent },
 ];

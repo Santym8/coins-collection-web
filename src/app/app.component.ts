@@ -10,12 +10,4 @@ import { HeaderComponent } from './_shared/components/header/header.component';
 })
 export class AppComponent {
   title = 'coins-collection-web';
-
-  ngOnInit() {
-    if (isDevMode()) {
-      console.log('Development!');
-    } else {
-      console.log('Production!');
-    }
-  }
 }
