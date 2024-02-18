@@ -1,17 +1,17 @@
 <div class="card-container">
-    <div class="text-gray-700 text-2xl text-center font-bold mt-1">
+    <div class="text-gray-700 text-2xl text-center font-bold mt-1 h-[8%]">
         #{{coin.coinNumber}}
     </div>
 
-    <div class="font-bold text-base text-center h-19 tracking-tight">{{coin.name}}</div>
+    <div class="font-bold text-base text-center tracking-tight h-[10%]">{{coin.name}}</div>
 
-    <div class="flex justify-center items-center mt-1">
-        <img style="width: 80%;" src={{coin.image}} alt="Descriptive Alt Text">
+    <div class="flex justify-center items-center mt-1 h-[60%]">
+        <img style="width: 80%;" src={{coin.image}} alt={{coin.name}}>
     </div>
 
-    <div class="font-bold text-2xl text-center mt-1">{{coin.year}}</div>
+    <div class="font-bold text-2xl text-center mt-1 h-[7%]">{{coin.year}}</div>
 
-    <div *ngIf="userLoggedIn" class="flex justify-center items-center mt-1">
+    <div *ngIf="userLoggedIn" class="flex justify-center items-center mt-1 h-[10%]">
         <button *ngIf="coin.found" class="button-found text-white text-base font-bold py-2 px-4">
             FOUND
         </button>
