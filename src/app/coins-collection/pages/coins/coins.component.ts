@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoinCardComponent } from '../../components/coin-card/coin-card.component';
 import { CommonModule } from '@angular/common';
 import { Coin } from '../../models/Coin';
+import { StorageService } from '../../../_shared/services/storage/storage.service';
+import { Subscription } from 'rxjs';
+import { CoinService } from '../../services/coins/coins.service';
 
 @Component({
   selector: 'app-coins',
@@ -10,25 +13,37 @@ import { Coin } from '../../models/Coin';
   templateUrl: './coins.component.html',
   styleUrl: './coins.component.css'
 })
-export class CoinsComponent {
+export class CoinsComponent implements OnDestroy, OnInit {
+  constructor(
+    private storageService: StorageService,
+    private coinService: CoinService
+  ) { }
 
-  coinFound: Coin = {
-    id: '65cc0dc5c7b83b7c22134fe7',
-    program: '621ea811cee5982b1c89109e',
-    coinNumber: 1,
-    name: 'Maya Angelou',
-    year: 2022,
-    image: 'https://www.usmint.gov/wordpress/wp-content/uploads/2021/12/2022-american-women-quarters-coin-maya-angelou-uncirculated-reverse-300x300.jpg',
-    found: false
-  };
+  userLoggedIn: boolean = null!;
+  private loginStatusSubscription: Subscription = null!;
+  coins: Coin[] = [];
 
-  coinNotFound: Coin = {
-    id: '65cc0dc5c7b83b7c22134fe7',
-    program: '621ea811cee5982b1c89109e',
-    coinNumber: 1,
-    name: 'Maya Angelou',
-    year: 2022,
-    image: 'https://www.usmint.gov/wordpress/wp-content/uploads/2021/12/2022-american-women-quarters-coin-maya-angelou-uncirculated-reverse-300x300.jpg',
-    found: true
-  };
+
+  ngOnInit(): void {
+    this.loginStatusSubscription = this.storageService.getLoggedInStatus().subscribe((status) => {
+      this.userLoggedIn = status;
+    });
+
+    this.coinService.getCoins().subscribe({
+      next: data => {
+        this.coins = data as any as Coin[];
+      },
+      error: (error) => {
+        console.error(error);
+      }
+
+    });
+
+  }
+
+  ngOnDestroy() {
+    if (this.loginStatusSubscription) {
+      this.loginStatusSubscription.unsubscribe();
+    }
+  }
 }

@@ -1,6 +1,7 @@
 .card-container {
     border-color: #23A6F0;
-    width: 21rem;
+    width: 20rem;
+    height: 27rem;
     border-radius: 2rem;
     border-width: 1px;
 }

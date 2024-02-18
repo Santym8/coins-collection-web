@@ -1,3 +1,10 @@
-<app-coin-card [coin]="coinFound"></app-coin-card>
+<div class="flex">
+    <div class="w-[15%] top-[8vh] border-cyan-300 border fixed">
+        Filters
+    </div>
 
-<app-coin-card [coin]="coinNotFound"></app-coin-card>
+    <div class="w-[85%] ml-[15%] flex flex-wrap justify-evenly">
+        <app-coin-card *ngFor="let coin of coins" [coin]="coin" class="mx-2 my-5"></app-coin-card>
+
+    </div>
+</div>
