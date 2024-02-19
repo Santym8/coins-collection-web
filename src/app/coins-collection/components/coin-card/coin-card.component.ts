@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './coin-card.component.html',
   styleUrl: './coin-card.component.css'
 })
-export class CoinCardComponent implements OnDestroy, OnInit {
+export class CoinCardComponent {
 
   constructor(
     private storageService: StorageService,
@@ -24,30 +24,25 @@ export class CoinCardComponent implements OnDestroy, OnInit {
   ) { }
 
   userLoggedIn: boolean = null!;
-  private loginStatusSubscription: Subscription = null!;
+  // private loginStatusSubscription: Subscription = null!;
 
   @Input('coin') coin: Coin = null!;
 
   ngOnInit(): void {
-    this.loginStatusSubscription = this.storageService.getLoggedInStatus().subscribe((status) => {
-      this.userLoggedIn = status;
-    });
+    // this.loginStatusSubscription = this.storageService.getLoggedInStatus().subscribe((status) => {
+    //   this.userLoggedIn = status;
+    // });
+    this.userLoggedIn = this.storageService.isLoggedIn();
   }
 
-  ngOnDestroy() {
-    if (this.loginStatusSubscription) {
-      this.loginStatusSubscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy() {
+  //   if (this.loginStatusSubscription) {
+  //     this.loginStatusSubscription.unsubscribe();
+  //   }
+  // }
 
 
   onClickHandler() {
-    if (!this.userLoggedIn) {
-      this.router.navigate(['/login']);
-      this.toastr.error('You need to login to add coins to your collection', 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
-      return;
-    }
-
     const token = this.storageService.getUserToken();
 
     if (!token) {
@@ -63,6 +58,12 @@ export class CoinCardComponent implements OnDestroy, OnInit {
           this.coin.found = !this.coin.found;
         },
         error: (err) => {
+          if (err.status === 401) {
+            this.storageService.clean();
+            this.toastr.warning("Your session has expired", 'Login', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
+            return;
+          }
+
           this.toastr.error('Error adding coin to your collection', 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
         }
       }

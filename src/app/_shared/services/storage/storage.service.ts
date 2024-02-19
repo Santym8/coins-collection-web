@@ -12,7 +12,7 @@ export class StorageService {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
-  private isLoggedIn(): boolean {
+  public isLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       const user = window.sessionStorage.getItem(USER_KEY);
       return !!user;

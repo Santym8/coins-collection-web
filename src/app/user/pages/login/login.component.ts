@@ -26,7 +26,7 @@ export class LoginComponent {
     private library: FaIconLibrary,
     private storageService: StorageService,
     private toastr: ToastrService,
-    private router: Router
+    public router: Router
   ) {
     library.addIcons(faSpinner);
   }

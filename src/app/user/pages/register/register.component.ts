@@ -23,13 +23,10 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private library: FaIconLibrary,
     private storageService: StorageService,
     private toastr: ToastrService,
-    private router: Router
-  ) {
-    library.addIcons(faSpinner);
-  }
+    public router: Router
+  ) {}
 
 
   registerForm: RegisterForm = {

@@ -11,7 +11,7 @@
 
     <div class="font-bold text-2xl text-center mt-1 h-[7%]">{{coin.year}}</div>
 
-    <div *ngIf="userLoggedIn" class="flex justify-center items-center mt-1 h-[10%]" (click)="onClickHandler()">
+    <div *ngIf="coin.found != undefined" class="flex justify-center items-center mt-1 h-[10%]" (click)="onClickHandler()">
         <button *ngIf="coin.found" class="button-found text-white text-base font-bold py-2 px-4">
             FOUND
         </button>

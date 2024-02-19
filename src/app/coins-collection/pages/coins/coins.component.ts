@@ -16,38 +16,25 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './coins.component.html',
   styleUrl: './coins.component.css'
 })
-export class CoinsComponent implements OnDestroy, OnInit {
+export class CoinsComponent {
   constructor(
     private storageService: StorageService,
     private coinService: CoinService,
     private coinsCollectorService: CoinsCollectorService,
     private router: Router,
     private toastr: ToastrService,
-  ) { }
+  ) {
+  }
 
   userLoggedIn: boolean = null!;
-  private loginStatusSubscription: Subscription = null!;
   coins: Coin[] = [];
 
 
   ngOnInit(): void {
-    this.getLoginStatusHandler();
+    this.userLoggedIn = this.storageService.isLoggedIn();
     this.getCoinsHandler();
   }
 
-  ngOnDestroy() {
-    if (this.loginStatusSubscription) {
-      this.loginStatusSubscription.unsubscribe();
-    }
-  }
-
-
-
-  private getLoginStatusHandler() {
-    this.loginStatusSubscription = this.storageService.getLoggedInStatus().subscribe((status) => {
-      this.userLoggedIn = status;
-    });
-  }
 
   private getCoinsHandler() {
 
@@ -65,7 +52,6 @@ export class CoinsComponent implements OnDestroy, OnInit {
     }
 
     const token = this.storageService.getUserToken();
-    console.log(token);
     if (token === null) {
       this.router.navigate(['/home']);
       this.toastr.error("We are having problems", 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
@@ -77,6 +63,11 @@ export class CoinsComponent implements OnDestroy, OnInit {
         this.coins = data as any as Coin[];
       },
       error: (error) => {
+        if (error.status === 401) {
+          this.storageService.clean();
+          this.toastr.warning("Your session has expired", 'Login', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
+          return;
+        }
         this.router.navigate(['/home']);
         this.toastr.error("We are having problems", 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
       }

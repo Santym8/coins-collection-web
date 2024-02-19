@@ -12,8 +12,8 @@
             <div class="mb-10">
                 <label for="password" class="block text-sm font-bold text-gray-700">Password *</label>
                 <input type="password" id="password" name="password" required placeholder="password"
-                    class="mt-1 p-2 w-full border rounded-md" [(ngModel)]="loginForm.password" required
-                    [maxLength]="20" [minlength]="8">
+                    class="mt-1 p-2 w-full border rounded-md" [(ngModel)]="loginForm.password" required [maxLength]="20"
+                    [minlength]="8">
             </div>
             <button type="submit" class="w-full text-white p-2 rounded-full" style="background-color: #23A6F0;">
                 <span *ngIf="!isLoading">Login</span>
@@ -23,10 +23,10 @@
             </button>
         </form>
 
-        <a href="/register" class="mt-10 lg:text-1xl font-bold py-2 px-4 rounded-full border w-"
-            style="border-color: #23A6F0;">
+        <button (click)="router.navigate(['register'])"
+            class="mt-10 lg:text-1xl font-bold py-2 px-4 rounded-full border w-" style="border-color: #23A6F0;">
             Register
-        </a>
+        </button>
 
     </div>
 
@@ -42,11 +42,11 @@
             <p class="lg:text-3xl my-10" style="color: #23A6F0;">START A</p>
             <h1 class="lg:text-7xl my-10 font-bold" style="color: #252B42;">Coin Collection</h1>
             <p class="lg:text-3xl my-10" style="color: #737373;">for free</p>
-            <a href="/coins-collection"
+            <button (click)="router.navigate(['/coins-collection'])"
                 class="mt-4 lg:text-3xl my-10 inline-block bg-transparent hover:text-white font-bold py-2 px-4 rounded-lg border"
                 style="color: #23A6F0; border-color: #23A6F0;">
                 See coins
-            </a>
+            </button>
         </div>
     </div>
 

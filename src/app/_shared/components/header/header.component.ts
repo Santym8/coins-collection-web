@@ -13,29 +13,25 @@ import { faArrowRightFromBracket, faUser } from '@fortawesome/free-solid-svg-ico
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent implements OnDestroy, OnInit {
 
   constructor(
     private storage: StorageService,
-    private router: Router
-  ) {
-    this.loginStatusSubscription = this.storage.getLoggedInStatus().subscribe((status) => {
-      this.userLoggedIn = status;
-    });
-  }
+    public router: Router
+  ) { }
 
   icons = {
     logout: faArrowRightFromBracket,
     user: faUser,
   };
 
-  userLoggedIn: boolean = false;
-  private loginStatusSubscription: Subscription;
+  userLoggedIn: boolean = null!;
+  private loginStatusSubscription: Subscription = null!;
 
-
-  logout() {
-    this.storage.clean();
-    this.router.navigate(['/']);
+  ngOnInit(): void {
+    this.loginStatusSubscription = this.storage.getLoggedInStatus().subscribe((status) => {
+      this.userLoggedIn = status;
+    });
   }
 
   ngOnDestroy() {
@@ -43,4 +39,11 @@ export class HeaderComponent implements OnDestroy {
       this.loginStatusSubscription.unsubscribe();
     }
   }
+
+
+  logoutHandler() {
+    this.storage.clean();
+    this.router.navigate(['/']);
+  }
+
 }
