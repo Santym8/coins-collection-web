@@ -5,6 +5,9 @@ import { Coin } from '../../models/Coin';
 import { StorageService } from '../../../_shared/services/storage/storage.service';
 import { Subscription } from 'rxjs';
 import { CoinService } from '../../services/coins/coins.service';
+import { CoinsCollectorService } from '../../services/coins-collector/coins-collector.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-coins',
@@ -16,7 +19,10 @@ import { CoinService } from '../../services/coins/coins.service';
 export class CoinsComponent implements OnDestroy, OnInit {
   constructor(
     private storageService: StorageService,
-    private coinService: CoinService
+    private coinService: CoinService,
+    private coinsCollectorService: CoinsCollectorService,
+    private router: Router,
+    private toastr: ToastrService,
   ) { }
 
   userLoggedIn: boolean = null!;
@@ -25,25 +31,57 @@ export class CoinsComponent implements OnDestroy, OnInit {
 
 
   ngOnInit(): void {
-    this.loginStatusSubscription = this.storageService.getLoggedInStatus().subscribe((status) => {
-      this.userLoggedIn = status;
-    });
-
-    this.coinService.getCoins().subscribe({
-      next: data => {
-        this.coins = data as any as Coin[];
-      },
-      error: (error) => {
-        console.error(error);
-      }
-
-    });
-
+    this.getLoginStatusHandler();
+    this.getCoinsHandler();
   }
 
   ngOnDestroy() {
     if (this.loginStatusSubscription) {
       this.loginStatusSubscription.unsubscribe();
     }
+  }
+
+
+
+  private getLoginStatusHandler() {
+    this.loginStatusSubscription = this.storageService.getLoggedInStatus().subscribe((status) => {
+      this.userLoggedIn = status;
+    });
+  }
+
+  private getCoinsHandler() {
+
+    if (!this.userLoggedIn) {
+      this.coinService.getCoins().subscribe({
+        next: data => {
+          this.coins = data as any as Coin[];
+        },
+        error: (error) => {
+          this.router.navigate(['/home']);
+          this.toastr.error("We are having problems", 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
+        }
+      });
+      return;
+    }
+
+    const token = this.storageService.getUserToken();
+    console.log(token);
+    if (token === null) {
+      this.router.navigate(['/home']);
+      this.toastr.error("We are having problems", 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
+      return;
+    }
+
+    this.coinsCollectorService.getCoinsCollector(token).subscribe({
+      next: data => {
+        this.coins = data as any as Coin[];
+      },
+      error: (error) => {
+        this.router.navigate(['/home']);
+        this.toastr.error("We are having problems", 'Error', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
+      }
+    });
+
+
   }
 }

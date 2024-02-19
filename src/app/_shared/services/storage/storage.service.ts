@@ -42,4 +42,14 @@ export class StorageService {
   public getLoggedInStatus() {
     return this.loggedInStatus.asObservable();
   }
+
+  public getUserToken(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      const user = window.sessionStorage.getItem(USER_KEY);
+      if (user) {
+        return JSON.parse(user).token;
+      }
+    }
+    return null;
+  }
 }
