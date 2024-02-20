@@ -12,12 +12,20 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FiltersBarComponent } from '../../components/filters-bar/filters-bar.component';
 import { CoinFilters } from '../../models/CoinFilters';
 import { SearchCoinPipe } from '../../pipes/search-coin/search-coin.pipe';
+import { FoundFilterPipe } from '../../pipes/found-filter/found-filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-coins',
   standalone: true,
-  imports: [CoinCardComponent, FontAwesomeModule, FiltersBarComponent, SearchCoinPipe],
+  imports: [
+    CoinCardComponent,
+    FontAwesomeModule,
+    FiltersBarComponent,
+    SearchCoinPipe,
+    FoundFilterPipe
+  ],
   templateUrl: './coins.component.html',
   styleUrl: './coins.component.css'
 })
@@ -41,6 +49,7 @@ export class CoinsComponent {
 
   filterValues: CoinFilters = {
     search: '',
+    found: ['found', 'notFound'],
   };
 
   ngOnInit(): void {
@@ -50,8 +59,11 @@ export class CoinsComponent {
   }
 
   onFilterChange(filters: CoinFilters) {
-    console.log(filters.search)
     this.filterValues = filters;
+  }
+
+  onCoinChange(coin: Coin) {
+    this.getCoinsHandler()
   }
 
 

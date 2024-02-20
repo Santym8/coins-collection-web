@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { StorageService } from '../../../_shared/services/storage/storage.service';
 import { Coin } from '../../models/Coin';
 import { Subscription } from 'rxjs';
@@ -27,6 +27,7 @@ export class CoinCardComponent {
   // private loginStatusSubscription: Subscription = null!;
 
   @Input('coin') coin: Coin = null!;
+  @Output() coinChange = new EventEmitter<Coin>();
 
   ngOnInit(): void {
     // this.loginStatusSubscription = this.storageService.getLoggedInStatus().subscribe((status) => {
@@ -56,6 +57,7 @@ export class CoinCardComponent {
         next: () => {
           this.toastr.success('Action completed successfully', 'Success', { timeOut: 3000, closeButton: true, positionClass: 'toast-top-center' });
           this.coin.found = !this.coin.found;
+          this.coinChange.emit(this.coin);
         },
         error: (err) => {
           if (err.status === 401) {

@@ -14,9 +14,14 @@
     <div class="w-[85%] ml-[15%] flex flex-wrap justify-evenly">
         @for (
         coin of coins
-        | searchCoin:filterValues.search;
-        track coin) {
-        <app-coin-card [coin]="coin" class="mx-2 my-5"></app-coin-card>
+        | searchCoin:filterValues.search
+        | foundFilter:filterValues.found
+        ;track coin) {
+        <app-coin-card (coinChange)="onCoinChange($event)" [coin]="coin" class="mx-2 my-5"></app-coin-card>
+        }@empty {
+        <div class="w-full h-[70vh] flex items-center justify-center text-5xl">
+            No results
+        </div>
         }
     </div>
 </div>
