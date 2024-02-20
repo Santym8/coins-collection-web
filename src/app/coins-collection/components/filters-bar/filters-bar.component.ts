@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch, faBook } from '@fortawesome/free-solid-svg-icons';
 import { CoinFilters } from '../../models/CoinFilters';
+import { StorageService } from '../../../_shared/services/storage/storage.service';
 
 
 @Component({
@@ -14,12 +15,23 @@ import { CoinFilters } from '../../models/CoinFilters';
 })
 export class FiltersBarComponent {
 
+  constructor(
+    private storageService: StorageService,
+  ) { }
+
   @Output() filters = new EventEmitter<CoinFilters>();
 
   filterValues: CoinFilters = {
     search: '',
     found: ['found', 'notFound'],
   };
+
+  ngOnInit(): void {
+    this.userLoggedIn = this.storageService.isLoggedIn();
+  }
+
+  userLoggedIn: boolean = null!;
+
 
   foundCheckboxes = [
     true,
