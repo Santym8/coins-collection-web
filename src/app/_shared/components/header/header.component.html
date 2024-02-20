@@ -6,12 +6,15 @@
 
 
     <nav class="flex items-center justify-center" style="color: #737373;">
-        <button (click)="router.navigate(['/'])" class="mx-10 hover:bg-gray-300 w-full rounded-md text-center">Home</button>
-        <button (click)="router.navigate(['/coins-collection'])"class="mx-10 hover:bg-gray-300 w-full rounded-md text-center">Coins</button>
+        <button (click)="router.navigate(['/'])"
+            class="mx-10 hover:bg-gray-300 w-full rounded-md text-center">Home</button>
+        <button (click)="router.navigate(['/coins-collection'])"
+            class="mx-10 hover:bg-gray-300 w-full rounded-md text-center">Coins</button>
     </nav>
 
-
-    <div *ngIf="!userLoggedIn" class="md:flex items-center text-base justify-end text-center" style="color: #23A6F0;">
+    @if (!userLoggedIn) {
+        
+    <div class="md:flex items-center text-base justify-end text-center" style="color: #23A6F0;">
         <fa-icon class="w-5 h-5 mr-2" [icon]="icons.user"></fa-icon>
         <div class="flex justify-center align-middle">
             <button (click)="router.navigate(['/login'])" class="mx-1">Login</button>
@@ -20,8 +23,9 @@
         </div>
     </div>
 
+    }@else {
 
-    <div *ngIf="userLoggedIn" class="md:flex items-center text-base justify-end text-center" style="color: #23A6F0;">
+    <div class="md:flex items-center text-base justify-end text-center" style="color: #23A6F0;">
         <fa-icon class="w-5 h-5 mr-2" [icon]="icons.logout"></fa-icon>
         <div class="flex justify-center align-middle">
             <button (click)="logoutHandler()">
@@ -30,4 +34,9 @@
         </div>
 
     </div>
+    }
+
+
+
+
 </div>

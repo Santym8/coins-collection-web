@@ -9,7 +9,7 @@ import { faArrowRightFromBracket, faUser } from '@fortawesome/free-solid-svg-ico
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [FontAwesomeModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
