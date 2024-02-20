@@ -1,10 +1,20 @@
+@if (loadingCards) {
+<div class="w-screen mt-[8vh] h-[82vh] flex justify-center items-center">
+    <div>
+        <fa-icon class="text-9xl" style="color: #23A6F0;" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
+    </div>
+</div>
+}
+
+@else {
 <div class="flex">
     <div class="w-[15%] top-[8vh] border-cyan-300 border fixed">
         Filters
     </div>
-
     <div class="w-[85%] ml-[15%] flex flex-wrap justify-evenly">
-        <app-coin-card *ngFor="let coin of coins" [coin]="coin" class="mx-2 my-5"></app-coin-card>
-
+        @for (coin of coins; track coin) {
+        <app-coin-card [coin]="coin" class="mx-2 my-5"></app-coin-card>
+        }
     </div>
 </div>
+}
