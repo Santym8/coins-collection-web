@@ -12,9 +12,28 @@
     </div>
 
 
-    @if (userLoggedIn) {
+    <!-- Program filter -->
+    <div class="input-container flex mt-14 border rounded-3xl ml-2 w-full items-center">
+        <div class="w-[30%] flex justify-center items-center text-3xl">
+            <fa-icon [icon]="icons.sliders"></fa-icon>
+        </div>
+
+        <div class="w-[70%] text-1xl py-3">
+            @for (program of programs; track program) {
+            <div class="flex items-center mb-4">
+                <input checked (change)="onProgramFilterChange(program)" id="default-checkbox" type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    {{program.name}}</label>
+            </div>
+            }
+        </div>
+
+    </div>
+
     <!-- Found filter -->
-    <div class="input-container flex mt-14 border rounded-full ml-2 w-full items-center">
+    @if (userLoggedIn) {
+    <div class="input-container flex mt-14 border rounded-3xl ml-2 w-full items-center">
         <div class="w-[30%] flex justify-center items-center text-3xl">
             <fa-icon [icon]="icons.book"></fa-icon>
         </div>

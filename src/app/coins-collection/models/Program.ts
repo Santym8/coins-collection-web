@@ -1,5 +1,6 @@
 export interface Program {
-    name: String;
+    _id: string;
+    name: string;
     amount: Number;
     status: Boolean;
 }

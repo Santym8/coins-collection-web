@@ -14,6 +14,7 @@ import { CoinFilters } from '../../models/CoinFilters';
 import { SearchCoinPipe } from '../../pipes/search-coin/search-coin.pipe';
 import { FoundFilterPipe } from '../../pipes/found-filter/found-filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { ProgramFilterPipe } from '../../pipes/program-filter/program-filter.pipe';
 
 
 @Component({
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     FontAwesomeModule,
     FiltersBarComponent,
     SearchCoinPipe,
-    FoundFilterPipe
+    FoundFilterPipe,
+    ProgramFilterPipe
   ],
   templateUrl: './coins.component.html',
   styleUrl: './coins.component.css'
@@ -50,6 +52,7 @@ export class CoinsComponent {
   filterValues: CoinFilters = {
     search: '',
     found: ['found', 'notFound'],
+    programs: ['-1']
   };
 
   ngOnInit(): void {

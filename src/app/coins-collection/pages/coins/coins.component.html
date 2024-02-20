@@ -16,6 +16,7 @@
         coin of coins
         | searchCoin:filterValues.search
         | foundFilter:filterValues.found
+        | programFilter:filterValues.programs
         ;track coin) {
         <app-coin-card (coinChange)="onCoinChange($event)" [coin]="coin" class="mx-2 my-5"></app-coin-card>
         }@empty {
