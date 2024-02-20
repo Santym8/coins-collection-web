@@ -3,19 +3,21 @@ import { CoinCardComponent } from '../../components/coin-card/coin-card.componen
 import { CommonModule } from '@angular/common';
 import { Coin } from '../../models/Coin';
 import { StorageService } from '../../../_shared/services/storage/storage.service';
-import { Subscription } from 'rxjs';
 import { CoinService } from '../../services/coins/coins.service';
 import { CoinsCollectorService } from '../../services/coins-collector/coins-collector.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FiltersBarComponent } from '../../components/filters-bar/filters-bar.component';
+import { CoinFilters } from '../../models/CoinFilters';
+import { SearchCoinPipe } from '../../pipes/search-coin/search-coin.pipe';
 
 
 @Component({
   selector: 'app-coins',
   standalone: true,
-  imports: [CoinCardComponent, FontAwesomeModule],
+  imports: [CoinCardComponent, FontAwesomeModule, FiltersBarComponent, SearchCoinPipe],
   templateUrl: './coins.component.html',
   styleUrl: './coins.component.css'
 })
@@ -37,11 +39,19 @@ export class CoinsComponent {
   userLoggedIn: boolean = null!;
   coins: Coin[] = [];
 
+  filterValues: CoinFilters = {
+    search: '',
+  };
 
   ngOnInit(): void {
     this.loadingCards = true;
     this.userLoggedIn = this.storageService.isLoggedIn();
     this.getCoinsHandler();
+  }
+
+  onFilterChange(filters: CoinFilters) {
+    console.log(filters.search)
+    this.filterValues = filters;
   }
 
 

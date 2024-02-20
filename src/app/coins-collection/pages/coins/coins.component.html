@@ -8,11 +8,14 @@
 
 @else {
 <div class="flex">
-    <div class="w-[15%] top-[8vh] border-cyan-300 border fixed">
-        Filters
+    <div class="w-[15%] top-[8vh] h-[90vh] fixed">
+        <app-filters-bar (filters)="onFilterChange($event)"></app-filters-bar>
     </div>
     <div class="w-[85%] ml-[15%] flex flex-wrap justify-evenly">
-        @for (coin of coins; track coin) {
+        @for (
+        coin of coins
+        | searchCoin:filterValues.search;
+        track coin) {
         <app-coin-card [coin]="coin" class="mx-2 my-5"></app-coin-card>
         }
     </div>

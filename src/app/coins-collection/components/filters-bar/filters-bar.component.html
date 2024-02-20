@@ -1,0 +1,16 @@
+<div class="w-full h-full border-cyan-50">
+    <!-- Search by year -->
+    <div class="input-container flex mt-14 border rounded-full ml-2 w-full items-center">
+        <div class="w-[30%] flex justify-center items-center text-3xl">
+            <fa-icon [icon]="icons.search"></fa-icon>
+        </div>
+        <div class="w-[70%] pr-3 flex justify-center items-center text-1xl">
+            <input placeholder="Search" type="text" name="search" id="search"
+                class="h-full w-full border-b border-blue-gray-200 bg-transparent font-sans font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" 
+                [(ngModel)]="filterValues.search"
+                (input)="onSearch()"
+                />
+        </div>
+    </div>
+
+</div>
