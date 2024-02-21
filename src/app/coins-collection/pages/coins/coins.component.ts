@@ -55,6 +55,9 @@ export class CoinsComponent {
     programs: ['-1']
   };
 
+  totalCoins: number = 0;
+  foundCoins: number = 0;
+
   ngOnInit(): void {
     this.loadingCards = true;
     this.userLoggedIn = this.storageService.isLoggedIn();
@@ -63,10 +66,21 @@ export class CoinsComponent {
 
   onFilterChange(filters: CoinFilters) {
     this.filterValues = filters;
+    this.getNumberCoinsFound();
+  }
+
+  getNumberCoinsFound() {
+    const programFilterPipe = new ProgramFilterPipe();
+    const programFiltered = programFilterPipe.transform(this.coins, this.filterValues.programs);
+    this.totalCoins = programFiltered.length;
+
+    const foundFilterPipe = new FoundFilterPipe();
+    const foundFiltered = foundFilterPipe.transform(programFiltered, ["found"]);
+    this.foundCoins = foundFiltered.length;
   }
 
   onCoinChange(coin: Coin) {
-    this.getCoinsHandler()
+    this.getCoinsHandler();
   }
 
 
@@ -77,6 +91,7 @@ export class CoinsComponent {
         next: data => {
           this.coins = data as any as Coin[];
           this.loadingCards = false;
+          this.getNumberCoinsFound();
         },
         error: (error) => {
           this.router.navigate(['/home']);
@@ -97,6 +112,7 @@ export class CoinsComponent {
       next: data => {
         this.coins = data as any as Coin[];
         this.loadingCards = false;
+        this.getNumberCoinsFound();
       },
       error: (error) => {
         if (error.status === 401) {

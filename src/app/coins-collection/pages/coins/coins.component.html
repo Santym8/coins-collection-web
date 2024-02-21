@@ -9,7 +9,31 @@
 @else {
 <div class="flex">
     <div class="w-[15%] top-[8vh] h-[90vh] fixed">
-        <app-filters-bar (filters)="onFilterChange($event)"></app-filters-bar>
+        <div class="w-full h-[50vh]">
+            <app-filters-bar (filters)="onFilterChange($event)"></app-filters-bar>
+        </div>
+
+        <div class="w-full text-center">
+            <div class="w-full">
+                <p class="w-full">
+                    Total number of coins in the selected programs
+                </p>
+                <p class="w-full text-3xl" style="color: #23A6F0;">
+                    {{totalCoins}}
+                </p>
+            </div>
+
+            @if (userLoggedIn) {
+            <div class="mt-5 w-full">
+                <p class="w-full">
+                    Total number of coins FOUND in the selected programs
+                </p>
+                <p class="w-full text-3xl" style="color: #23A6F0;">
+                    {{foundCoins}}
+                </p>
+            </div>
+            }
+        </div>
     </div>
     <div class="w-[85%] ml-[15%] flex flex-wrap justify-evenly">
         @for (
