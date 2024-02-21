@@ -35,8 +35,8 @@ export class LoginComponent {
   errorMessage: string = '';
 
   loginForm: LoginForm = {
-    username: 'test',
-    password: 'passwords'
+    username: '',
+    password: ''
   };
 
   onLogin() {

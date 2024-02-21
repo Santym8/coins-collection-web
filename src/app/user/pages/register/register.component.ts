@@ -30,9 +30,9 @@ export class RegisterComponent {
 
 
   registerForm: RegisterForm = {
-    username: 'test',
-    email: 'test@test.com',
-    password: 'password'
+    username: '',
+    email: '',
+    password: ''
   };
 
   isLoading: boolean = false;
