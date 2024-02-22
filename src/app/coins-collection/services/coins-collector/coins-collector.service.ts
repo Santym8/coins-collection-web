@@ -5,7 +5,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 const BASE_URL: string = environment['API_URL'] + "/api/coins-collector";
 
 const httpBaseOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache'
+  })
 };
 
 

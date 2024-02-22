@@ -5,7 +5,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 const BASE_URL: string = environment['API_URL'] + "/api/coin";
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache'
+  })
 };
 
 @Injectable({
@@ -23,7 +26,7 @@ export class CoinService {
     }
 
     const params = new HttpParams().set('program', program);
-    
+
     return this.http.get(BASE_URL, {
       ...httpOptions, params
     });
