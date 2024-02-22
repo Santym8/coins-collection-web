@@ -1,59 +1,68 @@
 <div class="w-full h-full border-cyan-50">
     <!-- Search by year -->
-    <div class="input-container flex mt-14 border rounded-full ml-2 w-full items-center">
-        <div class="w-[30%] flex justify-center items-center text-3xl">
-            <fa-icon [icon]="icons.search"></fa-icon>
-        </div>
-        <div class="w-[70%] pr-3 flex justify-center items-center text-1xl">
-            <input placeholder="Search" type="text" name="search" id="search"
-                class="h-full w-full border-b border-blue-gray-200 bg-transparent font-sans font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-                [(ngModel)]="filterValues.search" (input)="onSearch()" />
+    <div class="h-[20%]">
+        <div class=" input-container flex mt-14 border rounded-full ml-2 w-full items-center">
+            <div class="w-[30%] flex justify-center items-center text-3xl">
+                <fa-icon [icon]="icons.search"></fa-icon>
+            </div>
+            <div class="w-[70%] pr-3 flex justify-center items-center text-1xl">
+                <input placeholder="Search" type="text" name="search" id="search"
+                    class="h-full w-full border-b border-blue-gray-200 bg-transparent font-sans font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                    [(ngModel)]="filterValues.search" (input)="onSearch()" />
+            </div>
         </div>
     </div>
 
 
-    <!-- Program filter -->
-    <div class="input-container flex mt-14 border rounded-3xl ml-2 w-full items-center">
-        <div class="w-[30%] flex justify-center items-center text-3xl">
-            <fa-icon [icon]="icons.sliders"></fa-icon>
-        </div>
 
-        <div class="w-[70%] text-1xl py-3">
-            @for (program of programs; track program) {
-            <div class="flex items-center mb-4">
-                <input checked (change)="onProgramFilterChange(program)" id="default-checkbox" type="checkbox"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    {{program.name}}</label>
+    <!-- Program filter -->
+    <div class="h-[50%]">
+        <div class="input-container flex mt-2 border rounded-3xl ml-2 w-full items-center">
+            <div class="w-[30%] flex justify-center items-center text-3xl">
+                <fa-icon [icon]="icons.sliders"></fa-icon>
             </div>
-            }
+
+            <div class="w-[70%] text-1xl py-3">
+                @for (program of programs; track program) {
+                <div class="flex items-center mb-4">
+                    <input checked (change)="onProgramFilterChange(program)" id="default-checkbox" type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        {{program.name}}</label>
+                </div>
+                }
+            </div>
+
         </div>
 
     </div>
 
     <!-- Found filter -->
     @if (userLoggedIn) {
-    <div class="input-container flex mt-14 border rounded-3xl ml-2 w-full items-center">
-        <div class="w-[30%] flex justify-center items-center text-3xl">
-            <fa-icon [icon]="icons.book"></fa-icon>
-        </div>
-        <div class="w-[70%] text-1xl py-3">
-            <div class="flex items-center mb-4">
-                <input (change)="onFoundFilterChange()" [(ngModel)]="foundCheckboxes[0]" id="default-checkbox"
-                    type="checkbox"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    FOUND</label>
+    <div class="h-[30%]">
+        <div class="input-container flex mt-2 border rounded-3xl ml-2 w-full items-center">
+            <div class="w-[30%] flex justify-center items-center text-3xl">
+                <fa-icon [icon]="icons.book"></fa-icon>
             </div>
-            <div class="flex items-center">
-                <input (change)="onFoundFilterChange()" [(ngModel)]="foundCheckboxes[1]" id="checked-checkbox"
-                    type="checkbox"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    NOT FOUND</label>
+            <div class="w-[70%] text-1xl py-3">
+                <div class="flex items-center mb-4">
+                    <input (change)="onFoundFilterChange()" [(ngModel)]="foundCheckboxes[0]" id="default-checkbox"
+                        type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        FOUND</label>
+                </div>
+                <div class="flex items-center">
+                    <input (change)="onFoundFilterChange()" [(ngModel)]="foundCheckboxes[1]" id="checked-checkbox"
+                        type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        NOT FOUND</label>
+                </div>
             </div>
         </div>
     </div>
+
     }
 
 

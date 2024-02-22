@@ -9,11 +9,11 @@
 @else {
 <div class="flex">
     <div class="w-[15%] top-[8vh] h-[90vh] fixed">
-        <div class="w-full h-[50vh]">
+        <div class="w-full h-[60%]">
             <app-filters-bar (filters)="onFilterChange($event)"></app-filters-bar>
         </div>
 
-        <div class="w-full text-center">
+        <div class="w-full text-center h-[40%] flex flex-col ml-2">
             <div class="w-full">
                 <p class="w-full">
                     Total number of coins in the selected programs
@@ -24,7 +24,7 @@
             </div>
 
             @if (userLoggedIn) {
-            <div class="mt-5 w-full">
+            <div class="pt-5 w-full">
                 <p class="w-full">
                     Total number of coins FOUND in the selected programs
                 </p>
