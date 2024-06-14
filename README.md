@@ -3,7 +3,7 @@
 Coins Collection Web is a front-end project developed using Angular and TypeScript.
 
 - This project is currently available in [Vercel](https://coins-collection-web.vercel.app/)
-- The web backend can be found at [coins-collection-api-node](https://github.com/Santym8/coins-collection-api-node.git)
+- The backend can be found at [coins-collection-api-node](https://github.com/Santym8/coins-collection-api-node.git)
 - The mobile client can be found at [coins_collection_app](https://github.com/Santym8/coins_collection_app.git)
 
 ## API Use Cases
